@@ -1,5 +1,7 @@
 package com.yoyo.graddescent;
 
+import com.yoyo.common.DataSetLoadUtils;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -12,33 +14,7 @@ public class Algorithm {
 
     private static final String FILE_NAME = "/data.csv";
 
-    /**
-     * 加载数据集
-     * @return 数据集
-     */
-    private static double[][] loadDataSet() {
-        int no = 0;
-        List<String> lines = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(Algorithm.class.getResource(FILE_NAME).getPath()))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        if (!lines.isEmpty()) {
-            double[][] dataset = new double[lines.size()][2];
-            for (int i = 0; i < lines.size(); i++) {
-                String[] temp = lines.get(i).split(",");
-                dataset[i][0] = Double.valueOf(temp[0]);
-                dataset[i][1] = Double.valueOf(temp[1]);
-            }
-            return dataset;
-        }
-        return null;
-    }
 
     /**
      * 计算预测模型函数的值
@@ -101,7 +77,7 @@ public class Algorithm {
     }
 
     public static void main(String[] args) {
-        double[][] dataSet = loadDataSet();
+        double[][] dataSet = DataSetLoadUtils.loadDataSet(FILE_NAME, ",", 2);
         doGradDescent(dataSet);
     }
 }

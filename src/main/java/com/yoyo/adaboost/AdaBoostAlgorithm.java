@@ -1,6 +1,7 @@
 package com.yoyo.adaboost;
 
 import Jama.Matrix;
+import com.yoyo.common.MatrixUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
